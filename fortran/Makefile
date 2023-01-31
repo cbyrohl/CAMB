@@ -40,8 +40,8 @@ ifeq "$(ifortErr)" "0"
 #Intel compiler
 F90C     = ifort
 
-ifortVer_major = $(shell ifort -v 2>&1 | cut -d " " -f 3 | cut -d. -f 1)
-compiler_ver = $(shell ifort -v 2>&1)
+ifortVer_major := $(shell ifort --version 2>&1 | head -n 1 | cut -d " " -f 3 | cut -d .  -f 1 | rev | cut -c -2 | rev)
+compiler_ver := $(shell ifort --version 2>&1 | head -n 1 | cut -d " " -f 3)
 #other tests will be done by forutils
 ifeq ($(shell test $(ifortVer_major) -lt 18; echo $$?),0)
 $(warning ** ifort version lower than 18.0.1 may not work with the Python wrapper **)
